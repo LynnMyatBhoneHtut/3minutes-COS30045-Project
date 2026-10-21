@@ -1,0 +1,5 @@
+body { font-family: Arial, sans-serif; max-width: 760px; margin: 30px auto; padding: 0 16px; color: #222; }
+h2 { margin-top: 40px; }
+svg { width: 100%; height: auto; }
+.note { margin-top: 40px; font-size: 0.9em; color: #666; }
+.box { border: 2px dashed #999; padding: 14px; margin: 10px 0; background: #f7f7f7; }

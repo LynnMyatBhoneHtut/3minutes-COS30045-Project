@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond the Headlines</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Beyond the Headlines</h1>
+  <p>Road crash hospitalisations in Australia, 2011–2021. Team 3 minutes, COS30045.</p>
+
+  <h2>Q1: How have hospitalisations changed?</h2>
+  <p>They rose from 34,033 in 2011 to a peak in 2019, dropped in 2020 (COVID-19), then recovered.</p>
+  <div id="q1"></div>
+
+  <h2>Q2: Which road users are growing fastest?</h2>
+  <p>Each line starts at 100 in 2011. Cyclists grew the most (+51%); pedestrians fell (−15%).</p>
+  <div id="q2"></div>
+
+  <h2>Q3: Age and sex</h2>
+  <div class="box">Planned: bar chart by age group and sex</div>
+
+  <h2>Q4: States and First Nations</h2>
+  <div class="box">Planned: rates per 100,000 (needs ABS population data)</div>
+
+  <h2>Read the data carefully</h2>
+  <ul>
+    <li>Counts, not rates: bigger states have more cases.</li>
+    <li>Series breaks: Victoria (2012) and NSW (2017) changed how they count.</li>
+    <li>Bed days were counted differently from 2015–16.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <p>BITRE (2023), Hospitalised injury. AIHW. ABS (planned).</p>
+
+  <script src="js/d3.v7.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

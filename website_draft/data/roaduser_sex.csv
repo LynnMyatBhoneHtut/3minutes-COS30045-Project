@@ -1,0 +1,25 @@
+road_user,sex,hosp,bed_days,count_cases
+Bus occupant,Female,1618,7790,1627
+Bus occupant,Male,965,5270,974
+Car driver,Female,64966,253207,65161
+Car driver,Male,70092,362484,70567
+Car passenger,Female,31864,148639,32066
+Car passenger,Male,21376,107347,21510
+Car unknown position,Female,4251,26147,4267
+Car unknown position,Male,4584,30923,4612
+Heavy transport driver,Female,124,734,124
+Heavy transport driver,Male,4490,26322,4506
+Heavy transport passenger,Female,164,900,165
+Heavy transport passenger,Male,389,2254,389
+Heavy transport unknown position,Female,44,123,45
+Heavy transport unknown position,Male,400,2873,402
+Motorcyclist,Female,9629,49713,9650
+Motorcyclist,Male,82691,454385,82990
+Other or unknown,Female,2251,14853,2255
+Other or unknown,Male,4095,22757,4112
+Pedal cyclist,Female,16218,43075,16238
+Pedal cyclist,Male,59140,179422,59244
+Pedestrian,Female,12382,115412,12560
+Pedestrian,Male,16149,146766,16532
+Pick-up truck or van occupant,Female,595,2752,596
+Pick-up truck or van occupant,Male,2392,14703,2406
