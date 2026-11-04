@@ -3,7 +3,7 @@
 
 An interactive data story built with **D3.js v7** for COS30045 Data Visualisation (Swinburne University, 2026 HE Semester Aug).
 
-**Live site:** https://mercury.swin.edu.au/cos30045/s105973835/website_storyboard/
+**Live site:** https://mercury.swin.edu.au/cos30045/s105973835/data_story/
 
 ---
 
