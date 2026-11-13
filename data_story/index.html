@@ -22,6 +22,7 @@
     </div>
   </header>
 
+  <main class="app">
   <!-- Tab bar (Lynn): each tab is one screen, no scrolling -->
   <div class="tabbar" role="tablist" aria-label="Screens">
     <button type="button" role="tab" data-tab="overview" aria-controls="screen-overview">Overview</button>
@@ -40,7 +41,7 @@
     <span class="filter-note">Filters update every chart</span>
   </nav>
 
-  <main id="screen-overview" class="screen" role="tabpanel" aria-label="Overview">
+  <section id="screen-overview" class="screen" role="tabpanel" aria-label="Overview">
     <!-- Q1: Yati -->
     <section class="panel" id="p1">
       <h2>Hospitalisations rose 16% in a decade, dipping 5% in 2020 <span class="info" data-tip="Drag on the small chart to zoom the main chart.">i</span></h2>
@@ -69,7 +70,7 @@
       <div class="controls" id="q5-controls"></div>
       <div class="chart" id="q5"><div class="todo">Yati: First Nations 100% stacked bar, toggle % / counts</div></div>
     </section>
-  </main>
+  </section>
 
   <!-- Q1 Trend tab -->
   <section id="screen-trend" class="screen two" role="tabpanel" aria-label="Trend" hidden>
@@ -134,6 +135,8 @@
       <div class="chart" id="n7"><div class="todo">Lynn: line chart, two lines over the years</div></div>
     </section>
   </section>
+
+  </main>
 
   <!-- State detail pop-up (Lynn): opens when a state is clicked on the map -->
   <div id="state-detail" class="modal" role="dialog" aria-modal="true" aria-labelledby="sd-title" hidden>

@@ -54,7 +54,7 @@ DATA.then(data => {
     const cg = g.append("g").attr("transform", `translate(0,${mainH + gap})`);
     const xc = d3.scaleLinear().domain([2011, 2021]).range([0, w]);
     const yc = d3.scaleLinear().domain([0, d3.max(years, d => d.hosp) || 1]).range([ctxH, 0]);
-    cg.append("path").datum(years).attr("fill", C().dim)
+    cg.append("path").datum(years).attr("fill", C().mid)
       .attr("d", d3.area().x(d => xc(d.year)).y0(ctxH).y1(d => yc(d.hosp)));
     cg.append("g").attr("class", "axis").attr("transform", `translate(0,${ctxH})`)
       .call(d3.axisBottom(xc).ticks(10).tickFormat(d3.format("d")));
