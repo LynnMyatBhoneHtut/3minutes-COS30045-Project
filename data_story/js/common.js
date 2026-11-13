@@ -86,7 +86,9 @@ function C() {
     mid: v("--mid"),       // second grey (e.g. Regional)
     red: v("--red"),       // the finding (Swinburne red)
     panel: v("--panel"),   // panel background (used for borders and hollow points)
-    blue: v("--blue")      // "went down" side of the diverging map scale
+    blue: v("--blue"),     // "went down" side of the diverging map scale
+    catA: v("--cat-a"),    // first grey category (e.g. Major Cities)
+    catB: v("--cat-b")     // second grey category (e.g. Regional)
   };
 }
 const isDark = () => document.documentElement.dataset.theme === "dark";

@@ -3,7 +3,7 @@
 const FN_GROUPS = ["First Nations people", "Non-Indigenous"];
 const FN_AREAS = ["Major Cities", "Regional", "Remote"];
 // colours come from the shared palette, so they follow light / dark mode
-const FN_COLORS = { get "Major Cities"() { return C().dim; }, get "Regional"() { return C().mid; }, get "Remote"() { return C().red; } };
+const FN_COLORS = { get "Major Cities"() { return C().catA; }, get "Regional"() { return C().catB; }, get "Remote"() { return C().red; } };
 let fnMode = "share";
 
 DATA.then(data => {
@@ -39,6 +39,7 @@ DATA.then(data => {
       .selectAll("rect").data(d => d.map(v => ({ ...v, key: d.key }))).join("rect")
       .attr("x", d => x(d[0])).attr("width", d => Math.max(0, x(d[1]) - x(d[0])))
       .attr("y", d => y(d.data.status)).attr("height", y.bandwidth())
+      .attr("stroke", C().panel).attr("stroke-width", 1.5)   // thin gap between segments so they don't blend
       .on("mousemove", (e, d) => {
         const n = d.data[d.key + "_n"];
         showTip(e, `<b>${d.data.status}, ${year}</b><br>${d.key}: ${fmt(n)} (${d3.format(".0%")(n / d.data.total)})`);

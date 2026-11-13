@@ -77,8 +77,8 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
       .join("path")
       .attr("d", path)
       .attr("fill", function(d) { return color(change(d.properties.code, year)); })
-      .attr("stroke", function(d) { return d.properties.code === q4Selected ? C().ink : C().panel; })
-      .attr("stroke-width", function(d) { return d.properties.code === q4Selected ? 2 : 0.8; })
+      .attr("stroke", function(d) { return d.properties.code === q4Selected ? C().ink : C().mid; })
+      .attr("stroke-width", function(d) { return d.properties.code === q4Selected ? 2 : 0.6; })
       .style("cursor", "pointer")
       .on("mousemove", function(event, d) {
         var code = d.properties.code;
