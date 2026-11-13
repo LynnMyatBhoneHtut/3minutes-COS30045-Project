@@ -15,12 +15,12 @@
 * { box-sizing:border-box; }
 html, body { margin:0; height:100%; }
 body { font-family:"Segoe UI", Arial, sans-serif; color:var(--ink); background:var(--bg);
-  display:grid; grid-template-rows:auto auto auto 1fr auto; height:100vh; overflow:hidden; }
+  display:grid; grid-template-rows:auto auto auto 1fr auto; grid-template-columns:minmax(0, 1fr); height:100vh; overflow:hidden; }
 button { font:inherit; }
 
 /* ===== Header ===== */
-header { background:var(--header); color:var(--header-ink); border-bottom:6px solid #cc2131; display:flex; justify-content:space-between; align-items:center; padding:10px 20px; gap:16px; }
-header h1 { margin:0; font-size:1.3rem; }
+header { min-width:0; background:var(--header); color:var(--header-ink); border-bottom:6px solid #cc2131; display:flex; justify-content:space-between; align-items:center; padding:10px 20px; gap:16px; }
+header h1 { margin:0; font-size:clamp(1rem, 1.6vw, 1.3rem); }
 header p { margin:2px 0 0; font-size:.8rem; opacity:.75; }
 .head-right { display:flex; align-items:center; gap:22px; }
 .kpis { display:flex; gap:22px; }
@@ -49,9 +49,9 @@ header p { margin:2px 0 0; font-size:.8rem; opacity:.75; }
 .screen { display:grid; gap:10px; padding:8px 10px 10px; min-height:0; grid-row:4; grid-column:1; }
 /* Hidden tabs keep their size (so their charts draw correctly) but are invisible and not clickable */
 .screen[hidden] { display:grid; visibility:hidden; }
-#screen-overview { grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }   /* 4 charts, 2 x 2 */
-.screen.two { grid-template-columns:1fr 1fr; grid-template-rows:1fr; }
-.screen.one { grid-template-columns:1fr; grid-template-rows:1fr; }
+#screen-overview { grid-template-columns:repeat(2, minmax(0, 1fr)); grid-template-rows:repeat(2, minmax(0, 1fr)); }   /* 4 charts, 2 x 2 */
+.screen.two { grid-template-columns:repeat(2, minmax(0, 1fr)); grid-template-rows:minmax(0, 1fr); }
+.screen.one { grid-template-columns:minmax(0, 1fr); grid-template-rows:minmax(0, 1fr); }
 
 /* ===== Panels ===== */
 .panel { background:var(--panel); border-radius:4px; border-top:4px solid var(--red); padding:8px 12px; display:flex; flex-direction:column; min-height:0; box-shadow:var(--shadow); }
@@ -62,8 +62,11 @@ header p { margin:2px 0 0; font-size:.8rem; opacity:.75; }
 .controls button { border:1px solid var(--c, var(--red)); color:var(--c, var(--red)); background:transparent; border-radius:999px; padding:2px 9px; font-size:.72rem; cursor:pointer; }
 .controls button.on { background:var(--c, var(--red)); color:var(--panel); }
 .controls input[type="range"] { accent-color:var(--red); }
-.chart { flex:1; min-height:0; position:relative; }
-.chart svg { display:block; }
+.panel { min-width:0; }
+/* The chart area takes its size from the layout; the SVG sits on top of it, so an old drawing
+   can never stop a column from shrinking when the window gets smaller. */
+.chart { flex:1; min-height:0; min-width:0; position:relative; overflow:hidden; }
+.chart > svg { display:block; position:absolute; top:0; left:0; }
 .chart svg { color:var(--muted); fill:var(--ink); }   /* default axis + text colour; charts can still set their own */
 .todo { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:12px;
   border:2px dashed var(--dim); border-radius:4px; color:var(--muted); font-size:.85rem; }
@@ -79,7 +82,7 @@ header p { margin:2px 0 0; font-size:.8rem; opacity:.75; }
 .modal[hidden] { display:none; }
 .modal-box { width:min(1200px, 100%); height:min(720px, 100%); padding:16px 20px; }
 .modal-box h2 { font-size:1.15rem; }
-.sd-body { flex:1; min-height:0; display:grid; grid-template-columns:minmax(260px, 1fr) 1.6fr; gap:20px; }
+.sd-body { flex:1; min-height:0; display:grid; grid-template-columns:minmax(240px, 1fr) minmax(0, 1.6fr); gap:20px; }
 .sd-left { display:flex; flex-direction:column; min-height:0; gap:10px; }
 .sd-stats { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; }
 .sd-stats div { border-left:3px solid var(--red); padding:2px 0 2px 8px; }
