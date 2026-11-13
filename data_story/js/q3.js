@@ -51,7 +51,7 @@ DATA.then(function(data) {
     var y = d3.scaleBand().domain(Q3_AGES).range([0, h]).padding(0.04);
 
     // light to dark red: more people = darker (Swinburne red theme)
-    var color = d3.scaleSequential(d3.interpolateReds)
+    var color = d3.scaleSequential(seqRed)
       .domain([0, d3.max(cells, function(d) { return d.hosp; }) || 1]);
 
     g.append("g").attr("class", "axis")
@@ -63,7 +63,7 @@ DATA.then(function(data) {
       .call(d3.axisLeft(y).tickSize(0))
       .call(function(a) { a.select(".domain").remove(); })
       .selectAll("text")
-      .attr("fill", function(d) { return d === FILTER.age_group ? "#cc2131" : "#555"; })
+      .attr("fill", function(d) { return d === FILTER.age_group ? C().red : C().muted; })
       .attr("font-weight", function(d) { return d === FILTER.age_group ? 700 : 400; });
 
     g.selectAll(".q3-cell")
@@ -96,7 +96,7 @@ DATA.then(function(data) {
       .attr("width", x.bandwidth())
       .attr("height", h)
       .attr("fill", "none")
-      .attr("stroke", "#000")
+      .attr("stroke", C().ink)
       .attr("stroke-width", 1.5)
       .style("pointer-events", "none");
 
@@ -107,7 +107,7 @@ DATA.then(function(data) {
         .attr("width", w)
         .attr("height", y.bandwidth())
         .attr("fill", "none")
-        .attr("stroke", "#000")
+        .attr("stroke", C().ink)
         .attr("stroke-width", 1.5)
         .style("pointer-events", "none");
     }
@@ -123,12 +123,12 @@ DATA.then(function(data) {
       .attr("x", function(d, i) { return i * legendW / steps.length; })
       .attr("width", legendW / steps.length + 1)
       .attr("height", 8)
-      .attr("fill", function(d) { return d3.interpolateReds(d); });
+      .attr("fill", function(d) { return seqRed(d); });
 
-    legend.append("text").attr("x", 0).attr("y", 18).attr("font-size", 10).attr("fill", "#666").text("0");
-    legend.append("text").attr("x", legendW).attr("y", 18).attr("font-size", 10).attr("fill", "#666")
+    legend.append("text").attr("x", 0).attr("y", 18).attr("font-size", 10).attr("fill", C().muted).text("0");
+    legend.append("text").attr("x", legendW).attr("y", 18).attr("font-size", 10).attr("fill", C().muted)
       .attr("text-anchor", "end").text(fmt(color.domain()[1]));
-    legend.append("text").attr("x", legendW + 8).attr("y", 8).attr("font-size", 10).attr("fill", "#666")
+    legend.append("text").attr("x", legendW + 8).attr("y", 8).attr("font-size", 10).attr("fill", C().muted)
       .text((FILTER.group === "All" ? "All road users" : FILTER.group) + " · " + (FILTER.sex === "All" ? "all sexes" : FILTER.sex));
   }
 

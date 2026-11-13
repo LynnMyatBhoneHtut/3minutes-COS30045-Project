@@ -39,7 +39,7 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
   // blue = fewer than 2011, white = same, red = more than 2011
   var color = d3.scaleDiverging()
     .domain([-maxChange, 0, maxChange])
-    .interpolator(function(t) { return d3.interpolateRdBu(1 - t); });
+    .interpolator(function(t) { return divRB(t); });
 
   var pct = d3.format("+.0%");
 
@@ -52,7 +52,7 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
     .attr("min", 2011)
     .attr("max", 2021)
     .attr("step", 1)
-    .style("accent-color", "#cc2131")   // Swinburne red slider
+    .style("accent-color", "var(--red)")   // Swinburne red slider
     .on("input", function() { setFilter("year", +this.value); });
   controls.append("span").attr("id", "q4-year-text").style("font-size", "0.75rem");
 
@@ -77,7 +77,7 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
       .join("path")
       .attr("d", path)
       .attr("fill", function(d) { return color(change(d.properties.code, year)); })
-      .attr("stroke", function(d) { return d.properties.code === q4Selected ? "#000" : "#fff"; })
+      .attr("stroke", function(d) { return d.properties.code === q4Selected ? C().ink : C().panel; })
       .attr("stroke-width", function(d) { return d.properties.code === q4Selected ? 2 : 0.8; })
       .style("cursor", "pointer")
       .on("mousemove", function(event, d) {
@@ -156,13 +156,13 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
     line.append("line")
       .attr("x1", x(year)).attr("x2", x(year))
       .attr("y1", 0).attr("y2", lineH)
-      .attr("stroke", "#999")
+      .attr("stroke", C().muted)
       .attr("stroke-dasharray", "3,3");
 
     line.append("path")
       .datum(points)
       .attr("fill", "none")
-      .attr("stroke", "#cc2131")
+      .attr("stroke", C().red)
       .attr("stroke-width", 2)
       .attr("d", d3.line()
         .x(function(d) { return x(d.year); })
@@ -175,8 +175,8 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
       .attr("cx", function(d) { return x(d.year); })
       .attr("cy", function(d) { return y(d.hosp); })
       .attr("r", function(d) { return d.year === year ? 5 : 3; })
-      .attr("fill", function(d) { return d.brk ? "#fff" : "#cc2131"; })
-      .attr("stroke", "#cc2131")
+      .attr("fill", function(d) { return d.brk ? C().panel : C().red; })
+      .attr("stroke", C().red)
       .attr("stroke-width", 1.5)
       .style("cursor", "pointer")
       .on("mousemove", function(event, d) {
