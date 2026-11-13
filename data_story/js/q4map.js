@@ -1,5 +1,5 @@
 // Nyi Nyi – Q4 choropleth: % change in hospitalisations by state since 2011, with a linked line chart
-// Interaction: year slider (shared Year filter), click a state to show its line, tooltips on states and points.
+// Interaction: year slider (shared Year filter), click a state to show its line and open the big detail view, tooltips.
 // Connected to the filter bar: the slider and the Year menu stay in sync, and clicking a year point
 // on the line also changes the Year for every chart.
 // Note: the state file only has totals, so the Road user / Sex / Age filters do not apply here.
@@ -87,12 +87,13 @@ Promise.all([DATA, d3.json("data/aus_states.geojson")]).then(function(results) {
           year + ": " + fmt(count(code, year)) + "<br>" +
           "Change: " + pct(change(code, year));
         if (Q4_BREAK_NOTE[code]) { html = html + "<br><i>" + Q4_BREAK_NOTE[code] + "</i>"; }
-        showTip(event, html + "<br><small>Click to show the trend</small>");
+        showTip(event, html + "<br><small>Click for full details</small>");
       })
       .on("mouseleave", hideTip)
       .on("click", function(event, d) {
         q4Selected = d.properties.code;
         draw();
+        if (window.openStateDetail) openStateDetail(q4Selected);   // big detail view (statedetail.js, Lynn)
       });
 
     // put the selected state on top so its black outline is not hidden

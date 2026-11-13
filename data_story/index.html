@@ -62,12 +62,6 @@
       <div class="chart" id="q3"><div class="todo">Nyi Nyi: heatmap age group × year, sex toggle</div></div>
     </section>
 
-    <!-- Q4 map: Nyi Nyi -->
-    <section class="panel" id="p4">
-      <h2>Qld up 65%; NSW down 15% (counting change) <span class="info" data-tip="Counts, not rates. NSW (2017) and Vic (2012) have series breaks.">i</span></h2>
-      <div class="controls" id="q4-controls"></div>
-      <div class="chart" id="q4"><div class="todo">Nyi Nyi: choropleth % change by state + linked line, year slider</div></div>
-    </section>
 
     <!-- Q4 First Nations: Yati -->
     <section class="panel" id="p5">
@@ -78,12 +72,18 @@
   </main>
 
   <!-- Q1 Trend tab -->
-  <section id="screen-trend" class="screen one" role="tabpanel" aria-label="Trend" hidden>
+  <section id="screen-trend" class="screen two" role="tabpanel" aria-label="Trend" hidden>
     <!-- N1: Lynn -->
     <section class="panel" id="pn1">
       <h2>Cases rose almost every year; 2020 was the only real drop (−4.8%) <span class="info" data-tip="Percentage change in hospitalisations compared with the year before. Follows the Road user, Sex and Age filters.">i</span></h2>
       <div class="controls" id="n1-controls"></div>
       <div class="chart" id="n1"><div class="todo">Lynn: bar chart of % change from the previous year, up = red, down = blue</div></div>
+    </section>
+    <!-- Q4 map: Nyi Nyi -->
+    <section class="panel" id="p4">
+      <h2>Qld up 65%; NSW down 15% (counting change) <span class="info" data-tip="Counts, not rates. NSW (2017) and Vic (2012) have series breaks.">i</span></h2>
+      <div class="controls" id="q4-controls"></div>
+      <div class="chart" id="q4"><div class="todo">Nyi Nyi: choropleth % change by state + linked line, year slider</div></div>
     </section>
   </section>
 
@@ -135,6 +135,21 @@
     </section>
   </section>
 
+  <!-- State detail pop-up (Lynn): opens when a state is clicked on the map -->
+  <div id="state-detail" class="modal" role="dialog" aria-modal="true" aria-labelledby="sd-title" hidden>
+    <div class="modal-box panel">
+      <h2><span id="sd-title">State</span>
+        <span class="info" data-tip="Counts of hospitalisations by the patient's home state. Average stay = bed days ÷ hospitalisations; the bed-day method changed in 2015–16.">i</span>
+        <button type="button" class="fs-btn" id="sd-close" aria-label="Close state details">✕</button></h2>
+      <div class="controls" id="sd-controls"></div>
+      <div class="sd-body">
+        <div class="sd-left"><div class="chart" id="sd-shape"></div><div class="sd-stats" id="sd-stats"></div></div>
+        <div class="chart" id="sd-line"></div>
+      </div>
+      <p class="sd-note" id="sd-note"></p>
+    </div>
+  </div>
+
   <footer>Source: BITRE (2023), Hospitalised injury. Counts, not rates.</footer>
   <div id="tooltip"></div>
 
@@ -152,5 +167,6 @@
   <script src="js/n5.js"></script>
   <script src="js/n6.js"></script>
   <script src="js/n7.js"></script>
+  <script src="js/statedetail.js"></script>
 </body>
 </html>
