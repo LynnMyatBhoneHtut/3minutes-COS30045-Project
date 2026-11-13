@@ -13,7 +13,7 @@ DATA.then(data => {
     const x = d3.scaleBand().domain(rows.map(d => d.year)).range([0, w]).padding(0.3);
     const lim = Math.max(0.02, d3.max(rows, d => Math.abs(d.change)));
     const y = d3.scaleLinear().domain([-lim, lim]).nice().range([h, 0]);
-    const pct = d3.format("+.1%");
+    const pct = v => d3.format(Math.abs(v) < 0.0005 ? "+.2%" : "+.1%")(v);   // tiny changes get 2 decimals, so nothing shows as "−0.0%"
 
     g.append("g").attr("class", "axis").call(d3.axisLeft(y).ticks(6).tickFormat(d3.format("+.0%")).tickSize(-w))
       .call(a => a.select(".domain").remove());
