@@ -2,7 +2,8 @@
 // Where injured people live (remoteness), First Nations vs non-Indigenous, for the year in the filter bar.
 const FN_GROUPS = ["First Nations people", "Non-Indigenous"];
 const FN_AREAS = ["Major Cities", "Regional", "Remote"];
-const FN_COLORS = { "Major Cities": "#d6d6d6", "Regional": "#8c8c8c", "Remote": "#cc2131" };
+// colours come from the shared palette, so they follow light / dark mode
+const FN_COLORS = { get "Major Cities"() { return C().dim; }, get "Regional"() { return C().mid; }, get "Remote"() { return C().red; } };
 let fnMode = "share";
 
 DATA.then(data => {
@@ -48,15 +49,15 @@ DATA.then(data => {
     if (fnMode === "share") {
       g.selectAll(".fn-label").data(rows).join("text").attr("class", "fn-label")
         .attr("x", w).attr("y", d => y(d.status) - 4).attr("text-anchor", "end").attr("font-size", 11).attr("font-weight", 700)
-        .attr("fill", "#cc2131").text(d => `${d3.format(".0%")(d.Remote)} remote`);
+        .attr("fill", C().red).text(d => `${d3.format(".0%")(d.Remote)} remote`);
     }
 
-    svg.append("text").attr("x", 120).attr("y", 13).attr("font-size", 11).attr("fill", "#666").text(`Year ${year} · by place of residence`);
+    svg.append("text").attr("x", 120).attr("y", 13).attr("font-size", 11).attr("fill", C().muted).text(`Year ${year} · by place of residence`);
     const legend = svg.append("g").attr("transform", `translate(120,${h + 22 + 34})`);
     FN_AREAS.forEach((a, i) => {
       const lg = legend.append("g").attr("transform", `translate(${i * 100},0)`);
       lg.append("rect").attr("y", -9).attr("width", 10).attr("height", 10).attr("fill", FN_COLORS[a]);
-      lg.append("text").attr("x", 14).attr("font-size", 11).attr("fill", "#444").text(a);
+      lg.append("text").attr("x", 14).attr("font-size", 11).attr("fill", C().muted).text(a);
     });
   }
 
