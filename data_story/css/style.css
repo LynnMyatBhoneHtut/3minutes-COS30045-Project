@@ -2,12 +2,14 @@
 :root, :root[data-theme="light"] {
   --bg:#f3f3f3;  --panel:#ffffff; --ink:#1a1a1a; --muted:#595959; --grid:#e6e6e6;
   --dim:#d6d6d6; --mid:#8c8c8c;   --red:#cc2131; --blue:#2166ac; --border:#bdbdbd;
+  --cat-a:#8f8f8f; --cat-b:#505050;   /* two greys for categories, both 3:1+ on the panel */
   --header:#000000; --header-ink:#ffffff; --tip-bg:#1a1a1a; --tip-ink:#ffffff;
   --shadow:0 1px 3px rgba(0,0,0,.08);
 }
 :root[data-theme="dark"] {
   --bg:#121212;  --panel:#1e1e1e; --ink:#ececec; --muted:#b3b3b3; --grid:#333333;
   --dim:#4a4a4a; --mid:#8c8c8c;   --red:#ff6b78; --blue:#6aaed6; --border:#555555;
+  --cat-a:#767676; --cat-b:#c8c8c8;
   --header:#000000; --header-ink:#ffffff; --tip-bg:#ececec; --tip-ink:#1a1a1a;
   --shadow:0 1px 3px rgba(0,0,0,.6);
 }
@@ -29,6 +31,9 @@ header p { margin:2px 0 0; font-size:.8rem; opacity:.75; }
 .kpis span { font-size:.72rem; opacity:.8; text-transform:uppercase; }
 #theme-toggle { background:transparent; color:#fff; border:1px solid #fff; border-radius:999px; padding:4px 12px; font-size:.78rem; cursor:pointer; white-space:nowrap; }
 #theme-toggle:hover { background:#fff; color:#000; }
+
+/* <main> groups the tabs and screens for screen readers; display:contents keeps the page grid */
+.app { display:contents; }
 
 /* ===== Tab bar ===== */
 .tabbar { display:flex; gap:4px; padding:8px 10px 0; border-bottom:2px solid var(--grid); }
