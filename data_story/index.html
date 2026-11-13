@@ -12,12 +12,24 @@
       <h1>Road Crash Hospitalisations in Australia, 2011–2021</h1>
       <p>Team 3 minutes · COS30045 Data Visualisation</p>
     </div>
-    <div class="kpis">
-      <div><strong>410,884</strong><span>hospitalised</span></div>
-      <div><strong>~100</strong><span>per day</span></div>
-      <div><strong>+16%</strong><span>2011 → 2021</span></div>
+    <div class="head-right">
+      <div class="kpis">
+        <div><strong>410,884</strong><span>hospitalised</span></div>
+        <div><strong>~100</strong><span>per day</span></div>
+        <div><strong>+16%</strong><span>2011 → 2021</span></div>
+      </div>
+      <button type="button" id="theme-toggle" aria-pressed="false">☾ Dark mode</button>
     </div>
   </header>
+
+  <!-- Tab bar (Lynn): each tab is one screen, no scrolling -->
+  <div class="tabbar" role="tablist" aria-label="Screens">
+    <button type="button" role="tab" data-tab="overview" aria-controls="screen-overview">Overview</button>
+    <button type="button" role="tab" data-tab="trend" aria-controls="screen-trend">Trend</button>
+    <button type="button" role="tab" data-tab="roadusers" aria-controls="screen-roadusers">Road users</button>
+    <button type="button" role="tab" data-tab="people" aria-controls="screen-people">Age &amp; sex</button>
+    <button type="button" role="tab" data-tab="place" aria-controls="screen-place">Place</button>
+  </div>
 
   <nav class="filters" aria-label="Filters">
     <label>Year <select id="f-year"></select></label>
@@ -28,42 +40,100 @@
     <span class="filter-note">Filters update every chart</span>
   </nav>
 
-  <main>
+  <main id="screen-overview" class="screen" role="tabpanel" aria-label="Overview">
     <!-- Q1: Yati -->
     <section class="panel" id="p1">
-      <h2>Q1 · Hospitalisations rose 16% in a decade, dipping 5% in 2020 <span class="info" data-tip="Drag on the small chart to zoom the main chart.">i</span></h2>
+      <h2>Hospitalisations rose 16% in a decade, dipping 5% in 2020 <span class="info" data-tip="Drag on the small chart to zoom the main chart.">i</span></h2>
       <div class="controls" id="q1-controls"></div>
       <div class="chart" id="q1"><div class="todo">Yati: annotated line + context chart (brushing)</div></div>
     </section>
 
     <!-- Q2: Lynn -->
     <section class="panel" id="p2">
-      <h2>Q2 · Cyclist injuries grew fastest (+51%) <span class="info" data-tip="Lines are indexed: each starts at 100 in 2011 so groups of different sizes can be compared. Click a button to highlight a road user.">i</span></h2>
+      <h2>Cyclist injuries grew fastest (+51%) <span class="info" data-tip="Lines are indexed: each starts at 100 in 2011 so groups of different sizes can be compared. Click a button to highlight a road user.">i</span></h2>
       <div class="controls" id="q2-controls"></div>
       <div class="chart" id="q2"></div>
     </section>
 
     <!-- Q3: Nyi Nyi -->
     <section class="panel" id="p3">
-      <h2>Q3 · 40–64s hurt most; 65–74s grew fastest (+53%) <span class="info" data-tip="Darker = more hospitalisations. Use the toggle to switch sex.">i</span></h2>
+      <h2>40–64s hurt most; 65–74s grew fastest (+53%) <span class="info" data-tip="Darker = more hospitalisations. Use the toggle to switch sex.">i</span></h2>
       <div class="controls" id="q3-controls"></div>
       <div class="chart" id="q3"><div class="todo">Nyi Nyi: heatmap age group × year, sex toggle</div></div>
     </section>
 
     <!-- Q4 map: Nyi Nyi -->
     <section class="panel" id="p4">
-      <h2>Q4 · Qld up 65%; NSW down 15% (counting change) <span class="info" data-tip="Counts, not rates. NSW (2017) and Vic (2012) have series breaks.">i</span></h2>
+      <h2>Qld up 65%; NSW down 15% (counting change) <span class="info" data-tip="Counts, not rates. NSW (2017) and Vic (2012) have series breaks.">i</span></h2>
       <div class="controls" id="q4-controls"></div>
       <div class="chart" id="q4"><div class="todo">Nyi Nyi: choropleth % change by state + linked line, year slider</div></div>
     </section>
 
     <!-- Q4 First Nations: Yati -->
     <section class="panel" id="p5">
-      <h2>Q4 · 23% of First Nations patients live remotely <span class="info" data-tip="Remoteness of usual residence, not crash location.">i</span></h2>
+      <h2>23% of First Nations patients live remotely <span class="info" data-tip="Remoteness of usual residence, not crash location.">i</span></h2>
       <div class="controls" id="q5-controls"></div>
       <div class="chart" id="q5"><div class="todo">Yati: First Nations 100% stacked bar, toggle % / counts</div></div>
     </section>
   </main>
+
+  <!-- Q1 Trend tab -->
+  <section id="screen-trend" class="screen one" role="tabpanel" aria-label="Trend" hidden>
+    <!-- N1: Lynn -->
+    <section class="panel" id="pn1">
+      <h2>Cases rose almost every year; 2020 was the only real drop (−4.8%) <span class="info" data-tip="Percentage change in hospitalisations compared with the year before. Follows the Road user, Sex and Age filters.">i</span></h2>
+      <div class="controls" id="n1-controls"></div>
+      <div class="chart" id="n1"><div class="todo">Lynn: bar chart of % change from the previous year, up = red, down = blue</div></div>
+    </section>
+  </section>
+
+  <!-- Q2 Road users tab -->
+  <section id="screen-roadusers" class="screen two" role="tabpanel" aria-label="Road users" hidden>
+    <!-- N2: Lynn -->
+    <section class="panel" id="pn2">
+      <h2>Car drivers are 1 in 3 hospitalisations <span class="info" data-tip="Hospitalisations by road user for the chosen year, largest first. Truck, van or bus includes heavy vehicles, pick-ups, vans and buses.">i</span></h2>
+      <div class="controls" id="n2-controls"></div>
+      <div class="chart" id="n2"><div class="todo">Lynn: horizontal bar chart, road users sorted largest to smallest</div></div>
+    </section>
+    <!-- N3: Lynn -->
+    <section class="panel" id="pn3">
+      <h2>Nearly 9 in 10 injured motorcyclists are men <span class="info" data-tip="Male and female hospitalisations by road user for the chosen year. The label shows the male share.">i</span></h2>
+      <div class="controls" id="n3-controls"></div>
+      <div class="chart" id="n3"><div class="todo">Lynn: grouped bar chart, male vs female for each road user</div></div>
+    </section>
+  </section>
+
+  <!-- Q3 Age and sex tab -->
+  <section id="screen-people" class="screen two" role="tabpanel" aria-label="Age and sex" hidden>
+    <!-- N4: Nyi Nyi -->
+    <section class="panel" id="pn4">
+      <h2>Hospitalisations by age group <span class="owner">(Nyi Nyi)</span> <span class="info" data-tip="Change this to the chart's main finding.">i</span></h2>
+      <div class="controls" id="n4-controls"></div>
+      <div class="chart" id="n4"><div class="todo">Nyi Nyi: simple bar chart, one bar per age group for the chosen year</div></div>
+    </section>
+    <!-- N5: Nyi Nyi -->
+    <section class="panel" id="pn5">
+      <h2>Men and women over time <span class="owner">(Nyi Nyi)</span> <span class="info" data-tip="Change this to the chart's main finding.">i</span></h2>
+      <div class="controls" id="n5-controls"></div>
+      <div class="chart" id="n5"><div class="todo">Nyi Nyi: line chart, one line for male and one for female</div></div>
+    </section>
+  </section>
+
+  <!-- Q4 Place tab -->
+  <section id="screen-place" class="screen two" role="tabpanel" aria-label="Place" hidden>
+    <!-- N6: Nyi Nyi -->
+    <section class="panel" id="pn6">
+      <h2>Hospitalisations by state <span class="owner">(Nyi Nyi)</span> <span class="info" data-tip="Change this to the chart's main finding.">i</span></h2>
+      <div class="controls" id="n6-controls"></div>
+      <div class="chart" id="n6"><div class="todo">Nyi Nyi: horizontal bar chart, states for the chosen year, series breaks marked</div></div>
+    </section>
+    <!-- N7: Lynn -->
+    <section class="panel" id="pn7">
+      <h2>First Nations cases nearly doubled (+89%) <span class="info" data-tip="Indexed: each line starts at 100 in 2011. These are counts, not rates per person; population growth is not taken into account.">i</span></h2>
+      <div class="controls" id="n7-controls"></div>
+      <div class="chart" id="n7"><div class="todo">Lynn: line chart, two lines over the years</div></div>
+    </section>
+  </section>
 
   <footer>Source: BITRE (2023), Hospitalised injury. Counts, not rates.</footer>
   <div id="tooltip"></div>
@@ -75,5 +145,12 @@
   <script src="js/q3.js"></script>
   <script src="js/q4map.js"></script>
   <script src="js/q4fn.js"></script>
+  <script src="js/n1.js"></script>
+  <script src="js/n2.js"></script>
+  <script src="js/n3.js"></script>
+  <script src="js/n4.js"></script>
+  <script src="js/n5.js"></script>
+  <script src="js/n6.js"></script>
+  <script src="js/n7.js"></script>
 </body>
 </html>

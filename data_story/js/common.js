@@ -69,3 +69,106 @@ DATA.then(data => {
   onFilter("sync", sync);
   sync();
 });
+
+/* ===================== Stand-up 3: shared features (Lynn) ===================== */
+
+// ---- Colour palette: ONE place for every colour ----
+// Colours live in css/style.css as CSS variables, with a light and a dark set.
+// C() reads the current set, so charts get the right colours in both themes.
+function C() {
+  const s = getComputedStyle(document.documentElement);
+  const v = name => s.getPropertyValue(name).trim();
+  return {
+    ink: v("--ink"),       // main text, main line
+    muted: v("--muted"),   // labels, notes, reference lines
+    grid: v("--grid"),     // gridlines
+    dim: v("--dim"),       // faded / not selected / context
+    mid: v("--mid"),       // second grey (e.g. Regional)
+    red: v("--red"),       // the finding (Swinburne red)
+    panel: v("--panel"),   // panel background (used for borders and hollow points)
+    blue: v("--blue")      // "went down" side of the diverging map scale
+  };
+}
+const isDark = () => document.documentElement.dataset.theme === "dark";
+
+// Sequential scale (Q3 heatmap): more = stronger. Dark mode goes dark -> bright red.
+function seqRed(t) {
+  return isDark() ? d3.interpolateRgb("#2b2b2b", "#ff6b78")(t) : d3.interpolateReds(t);
+}
+// Diverging scale (Q4 map): 0 = blue (fewer), 0.5 = no change, 1 = red (more).
+function divRB(t) {
+  return isDark() ? d3.piecewise(d3.interpolateRgb, ["#6aaed6", "#3a3a3a", "#ff6b78"])(t)
+                  : d3.interpolateRdBu(1 - t);
+}
+
+// Redraw every chart (each chart already redraws on window resize via onDraw)
+function redrawAll() { window.dispatchEvent(new Event("resize")); }
+
+// ---- Light / dark mode ----
+(function theme() {
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem("theme"); } catch (e) { /* storage blocked: use light */ }
+  root.dataset.theme = saved === "dark" ? "dark" : "light";
+  const btn = document.getElementById("theme-toggle");
+  const label = () => { btn.textContent = isDark() ? "☀ Light mode" : "☾ Dark mode"; btn.setAttribute("aria-pressed", isDark()); };
+  label();
+  btn.addEventListener("click", () => {
+    root.dataset.theme = isDark() ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) { }
+    label(); redrawAll();
+  });
+})();
+
+// ---- Tab bar: switch between screens without scrolling ----
+(function tabs() {
+  const tabs = document.querySelectorAll('[role="tab"]');
+  function show(id) {
+    tabs.forEach(t => {
+      const on = t.dataset.tab === id;
+      t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+      document.getElementById("screen-" + t.dataset.tab).hidden = !on;
+    });
+    history.replaceState(null, "", "#" + id);
+    redrawAll();   // hidden charts had no size, so draw them now
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => show(t.dataset.tab));
+    t.addEventListener("keydown", e => {   // arrow keys move between tabs
+      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      const next = tabs[(i + step + tabs.length) % tabs.length];
+      next.focus(); show(next.dataset.tab);
+    });
+  });
+  const start = location.hash.slice(1);
+  show([...tabs].some(t => t.dataset.tab === start) ? start : tabs[0].dataset.tab);
+})();
+
+// ---- Full-screen button on every chart panel ----
+(function fullScreen() {
+  function close() {
+    const open = document.querySelector(".panel.is-full");
+    if (!open) return;
+    open.classList.remove("is-full");
+    open.querySelector(".fs-btn").textContent = "⛶";
+    open.querySelector(".fs-btn").setAttribute("aria-label", "Show chart full screen");
+    document.body.classList.remove("has-full");
+    redrawAll();
+  }
+  document.querySelectorAll(".panel h2").forEach(h2 => {
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "fs-btn"; btn.textContent = "⛶";
+    btn.setAttribute("aria-label", "Show chart full screen"); btn.title = "Full screen (Esc to close)";
+    btn.addEventListener("click", () => {
+      const panel = h2.closest(".panel");
+      if (panel.classList.contains("is-full")) return close();
+      close();
+      panel.classList.add("is-full"); document.body.classList.add("has-full");
+      btn.textContent = "✕"; btn.setAttribute("aria-label", "Close full screen");
+      redrawAll();
+    });
+    h2.appendChild(btn);
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+})();
