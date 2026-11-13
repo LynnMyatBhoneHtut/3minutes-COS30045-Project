@@ -156,7 +156,7 @@ function redrawAll() { window.dispatchEvent(new Event("resize")); }
     document.body.classList.remove("has-full");
     redrawAll();
   }
-  document.querySelectorAll(".panel h2").forEach(h2 => {
+  document.querySelectorAll(".screen .panel h2").forEach(h2 => {   // not the state pop-up
     const btn = document.createElement("button");
     btn.type = "button"; btn.className = "fs-btn"; btn.textContent = "⛶";
     btn.setAttribute("aria-label", "Show chart full screen"); btn.title = "Full screen (Esc to close)";
