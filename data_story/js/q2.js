@@ -2,7 +2,8 @@
 const Q2_GROUPS = ["Pedal cyclist", "Motorcyclist", "Car driver", "Car passenger", "Pedestrian", "Truck, van or bus"];
 // Colour-blind-safe categorical colours (Okabe-Ito). Cyclists = Swinburne red because they are the finding.
 // Dark mode uses lighter versions so the lines stay readable on a dark background.
-const Q2_LIGHT = { "Motorcyclist": "#0072b2", "Car passenger": "#cc79a7", "Pedestrian": "#009e73", "Truck, van or bus": "#e69f00" };
+// Light mode: darker shades of the same hues so labels reach 4.5:1 contrast on white (accessibility check)
+const Q2_LIGHT = { "Motorcyclist": "#0072b2", "Car passenger": "#bb4d8a", "Pedestrian": "#008460", "Truck, van or bus": "#9c6c00" };
 const Q2_DARK  = { "Motorcyclist": "#56b4e9", "Car passenger": "#e8a6cc", "Pedestrian": "#2fc79b", "Truck, van or bus": "#f0b93a" };
 function q2Color(name) {
   if (name === "Pedal cyclist") return C().red;
@@ -50,7 +51,8 @@ DATA.then(data => {
     const line = d3.line().x(d => x(d.year)).y(d => y(d.index));
     g.selectAll(".q2-line").data(ordered).join("path").attr("class", "q2-line")
       .attr("fill", "none").attr("stroke", d => isOn(d) ? q2Color(d.name) : C().dim)
-      .attr("stroke-width", d => q2Selected.has(d.name) ? 3 : 2).attr("d", d => line(d.values));
+      .attr("stroke-width", d => q2Selected.has(d.name) || d.name === "Pedal cyclist" ? 3.5 : 2)   // cyclists (the finding) always thicker: a cue that does not rely on colour
+      .attr("d", d => line(d.values));
 
     // hover points (details on demand)
     g.selectAll(".q2-pts").data(ordered.filter(isOn)).join("g").attr("class", "q2-pts")
