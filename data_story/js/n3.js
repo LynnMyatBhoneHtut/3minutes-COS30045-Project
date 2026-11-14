@@ -1,6 +1,10 @@
 // N3 – Lynn. Men and women by road user: two bars per group for the chosen year.
 // Male = dark (ink), Female = grey (mid): they differ in lightness, so they work for colour-blind readers.
 // The label shows % male; the most male-dominated group is in red. Follows Year and Age.
+//
+// AI use summary (Lynn): for Stand-up 3 I used Claude (Anthropic) to help build this new chart
+// (one of my four new charts) using our shared helpers in common.js.
+// I reviewed, tested and edited the code myself (see Appendix A of our Design Book).
 DATA.then(data => {
   function draw() {
     const c = C();

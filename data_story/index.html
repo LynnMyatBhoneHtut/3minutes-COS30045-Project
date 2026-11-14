@@ -24,12 +24,16 @@
 
   <main class="app">
   <!-- Tab bar (Lynn): each tab is one screen, no scrolling -->
-  <div class="tabbar" role="tablist" aria-label="Screens">
+  <div class="tabbar">
+  <div class="tabs" role="tablist" aria-label="Screens">
     <button type="button" role="tab" data-tab="overview" aria-controls="screen-overview">Overview</button>
     <button type="button" role="tab" data-tab="trend" aria-controls="screen-trend">Trend</button>
     <button type="button" role="tab" data-tab="roadusers" aria-controls="screen-roadusers">Road users</button>
     <button type="button" role="tab" data-tab="people" aria-controls="screen-people">Age &amp; sex</button>
     <button type="button" role="tab" data-tab="place" aria-controls="screen-place">Place</button>
+  </div>
+    <!-- Story line (Yati): the takeaway for this tab + a link to the next tab (filled by common.js) (outside the tablist, which may only hold tabs) -->
+    <p class="story" id="story" aria-live="polite"><span class="story-text"></span><button type="button" class="story-next"></button></p>
   </div>
 
   <nav class="filters" aria-label="Filters">
@@ -108,13 +112,13 @@
   <section id="screen-people" class="screen two" role="tabpanel" aria-label="Age and sex" hidden>
     <!-- N4: Nyi Nyi -->
     <section class="panel" id="pn4">
-      <h2>Hospitalisations by age group <span class="owner">(Nyi Nyi)</span> <span class="info" data-tip="Change this to the chart's main finding.">i</span></h2>
+      <h2>40–64s are the largest group: 1 in 3 patients <span class="info" data-tip="Hospitalisations by age group for the chosen year (40–64 = 33% in 2021). Follows Year, Road user and Sex; click a bar to filter every chart by that age group. Age groups cover different numbers of years, so compare with care.">i</span></h2>
       <div class="controls" id="n4-controls"></div>
       <div class="chart" id="n4"><div class="todo">Nyi Nyi: simple bar chart, one bar per age group for the chosen year</div></div>
     </section>
     <!-- N5: Nyi Nyi -->
     <section class="panel" id="pn5">
-      <h2>Men and women over time <span class="owner">(Nyi Nyi)</span> <span class="info" data-tip="Change this to the chart's main finding.">i</span></h2>
+      <h2>About 2 in 3 patients are men, every year <span class="info" data-tip="Male and female hospitalisations, 2011–2021. Men were 64–66% of patients in every year. Follows Road user and Age group; the Sex filter fades the other line. Click a point to choose that year.">i</span></h2>
       <div class="controls" id="n5-controls"></div>
       <div class="chart" id="n5"><div class="todo">Nyi Nyi: line chart, one line for male and one for female</div></div>
     </section>
@@ -124,7 +128,7 @@
   <section id="screen-place" class="screen two" role="tabpanel" aria-label="Place" hidden>
     <!-- N6: Nyi Nyi -->
     <section class="panel" id="pn6">
-      <h2>Hospitalisations by state <span class="owner">(Nyi Nyi)</span> <span class="info" data-tip="Change this to the chart's main finding.">i</span></h2>
+      <h2>Vic, Qld and NSW make up 78% of cases <span class="info" data-tip="Hospitalisations by state for the chosen year, largest first. These are counts, not rates: bigger states have more people. * = series break (the counting method changed). Click a bar for that state's details.">i</span></h2>
       <div class="controls" id="n6-controls"></div>
       <div class="chart" id="n6"><div class="todo">Nyi Nyi: horizontal bar chart, states for the chosen year, series breaks marked</div></div>
     </section>
@@ -153,7 +157,7 @@
     </div>
   </div>
 
-  <footer>Source: BITRE (2023), Hospitalised injury. Counts, not rates.</footer>
+  <footer><strong>What this means:</strong> road crashes hurt far more people than the death toll shows, and safety efforts should look closely at cyclists, older road users and remote communities. · Source: BITRE (2023), Hospitalised injury. Counts, not rates.</footer>
   <div id="tooltip"></div>
 
   <script src="js/d3.v7.min.js"></script>

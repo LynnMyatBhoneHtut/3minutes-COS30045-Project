@@ -1,6 +1,10 @@
 // N7 – Lynn. First Nations vs non-Indigenous hospitalisations over time, indexed (2011 = 100).
 // Indexing lets two groups of very different size share one scale. First Nations = red (the finding).
 // Follows the Year filter (vertical marker); click a point to choose a year.
+//
+// AI use summary (Lynn): for Stand-up 3 I used Claude (Anthropic) to help build this new chart
+// (one of my four new charts) using our shared helpers in common.js.
+// I reviewed, tested and edited the code myself (see Appendix A of our Design Book).
 DATA.then(data => {
   const GROUPS = ["First Nations people", "Non-Indigenous"];
   function draw() {

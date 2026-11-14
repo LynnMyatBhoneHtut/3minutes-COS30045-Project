@@ -1,5 +1,9 @@
 // Yati – Q4 First Nations 100% stacked bar, toggle % / counts
 // Where injured people live (remoteness), First Nations vs non-Indigenous, for the year in the filter bar.
+//
+// AI use summary: I asked Claude (Anthropic) to "write my part inside the dashboard: a First Nations chart
+// by remoteness with a % / count toggle that follows the Year filter". Claude wrote the first version of
+// this file (d3.stack for the 100% bar); I reviewed, tested and edited it (colours, the "remote" label).
 const FN_GROUPS = ["First Nations people", "Non-Indigenous"];
 const FN_AREAS = ["Major Cities", "Regional", "Remote"];
 // colours come from the shared palette, so they follow light / dark mode

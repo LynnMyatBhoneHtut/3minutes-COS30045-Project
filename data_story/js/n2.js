@@ -1,5 +1,9 @@
 // N2 – Lynn. Who gets hurt most: road user groups for the chosen year, largest first.
 // Red = the selected road user (or the largest group when Road user is "All"). Follows Year, Sex and Age.
+//
+// AI use summary (Lynn): for Stand-up 3 I used Claude (Anthropic) to help build this new chart
+// (one of my four new charts) using our shared helpers in common.js.
+// I reviewed, tested and edited the code myself (see Appendix A of our Design Book).
 DATA.then(data => {
   function draw() {
     const c = C();

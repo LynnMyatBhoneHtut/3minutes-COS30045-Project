@@ -1,5 +1,9 @@
 // N1 – Lynn. Change from the previous year (% up or down), one bar per year.
 // Up = red, down = blue (same meaning as the state map). Follows Road user, Sex and Age filters.
+//
+// AI use summary (Lynn): for Stand-up 3 I used Claude (Anthropic) to help build this new chart
+// (one of my four new charts) using our shared helpers in common.js.
+// I reviewed, tested and edited the code myself (see Appendix A of our Design Book).
 DATA.then(data => {
   function draw() {
     const c = C();

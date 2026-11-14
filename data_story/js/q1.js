@@ -1,5 +1,10 @@
 // Yati – Q1 annotated line + context chart (brushing, focus + context, tooltips)
 // Main chart = selected years. Small chart underneath = all years; drag on it to zoom the main chart.
+//
+// AI use summary: I asked Claude (Anthropic) to "write my part inside the dashboard: an annotated line chart
+// for Q1 with a brush to zoom, connected to the filter bar". Claude wrote the first version of this file
+// using our shared helpers in common.js; I reviewed, tested and edited it (e.g. event labels, the 2-year
+// minimum zoom, and ignoring brush events made by the code itself, which caused an endless redraw).
 const Q1_EVENTS = [
   { year: 2012, label: "Vic break" },
   { year: 2017, label: "NSW break" },

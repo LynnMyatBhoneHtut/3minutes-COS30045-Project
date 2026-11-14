@@ -1,4 +1,8 @@
 // Lynn – Q2 indexed multi-line (2011 = 100), filter / highlight buttons
+//
+// AI use summary (Lynn): for Stand-up 2 I used Claude (Anthropic) to help build this chart; for the final
+// version I used it to run the contrast and colour-blindness checks and pick the darker label colours below.
+// I reviewed, tested and edited the code myself (see Appendix A of our Design Book).
 const Q2_GROUPS = ["Pedal cyclist", "Motorcyclist", "Car driver", "Car passenger", "Pedestrian", "Truck, van or bus"];
 // Colour-blind-safe categorical colours (Okabe-Ito). Cyclists = Swinburne red because they are the finding.
 // Dark mode uses lighter versions so the lines stay readable on a dark background.

@@ -2,6 +2,9 @@
 // Click a state on the map -> a big view of that state with all its numbers:
 // the state shape, key numbers, and a large line chart (counts, or compared with all states).
 // Close with ✕, Esc, or by clicking outside. Follows the Year filter and light / dark mode.
+//
+// AI use summary (Lynn): for Stand-up 3 I used Claude (Anthropic) to help build this state detail pop-up.
+// I reviewed, tested and edited the code myself (see Appendix A of our Design Book).
 
 let sdState = null;          // state code shown, e.g. "Qld"
 let sdMode = "count";        // "count" or "index" (compared with all states, 2011 = 100)
