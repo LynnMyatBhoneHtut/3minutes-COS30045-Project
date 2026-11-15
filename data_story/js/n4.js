@@ -58,7 +58,8 @@ DATA.then(function(data) {
       .attr("y", function(d) { return y(d.hosp); })
       .attr("width", x.bandwidth())
       .attr("height", function(d) { return h - y(d.hosp); })
-      .attr("fill", function(d) { return d.age === focus ? c.red : c.dim; })
+      // Accessibility fix: the other bars use the darker grey (c.mid, 3.4:1 light / 5.0:1 dark) because the light grey failed 3:1 (see Design Book 3.4)
+      .attr("fill", function(d) { return d.age === focus ? c.red : c.mid; })
       .style("cursor", "pointer")
       .on("mousemove", function(event, d) {
         showTip(event, "<b>Age " + d.age + ", " + FILTER.year + "</b><br>" +
